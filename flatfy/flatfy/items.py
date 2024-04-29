@@ -8,7 +8,7 @@ from itemloaders.processors import TakeFirst
 
 
 class FlatItem(scrapy.Item):
-    id = scrapy.Field(output_processor=TakeFirst())
+    flat_id = scrapy.Field(output_processor=TakeFirst())
     area_total = scrapy.Field(output_processor=TakeFirst())
     built_year = scrapy.Field(output_processor=TakeFirst())
     currency = scrapy.Field(output_processor=TakeFirst())

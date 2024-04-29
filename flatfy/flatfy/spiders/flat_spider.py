@@ -25,7 +25,7 @@ class FlatSpiderSpider(scrapy.Spider):
         for flat in flats['data']:
             extract_field(flat, 'street')
             l = ItemLoader(item=FlatItem(), selector=flat)
-            l.add_value('id', flat['id'])
+            l.add_value('flat_id', flat['id'])
             l.add_value('area_total', flat['area_total'])
             l.add_value('built_year', flat['built_year'])
             l.add_value('currency', flat['currency'])
