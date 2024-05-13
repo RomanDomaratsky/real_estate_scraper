@@ -22,3 +22,4 @@ class FlatItem(scrapy.Item):
     room_count = scrapy.Field(output_processor=TakeFirst())
     description = scrapy.Field(output_processor=TakeFirst())
     floor = scrapy.Field(output_processor=TakeFirst())
+    insertion_date = scrapy.Field(output_processor=TakeFirst())

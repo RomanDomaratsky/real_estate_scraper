@@ -3,6 +3,7 @@ import json
 from scrapy.loader import ItemLoader
 from ..items import FlatItem
 from ..json_extractor import extract_field
+from datetime import date
 
 
 class FlatSpiderSpider(scrapy.Spider):
@@ -39,6 +40,7 @@ class FlatSpiderSpider(scrapy.Spider):
             l.add_value('price', flat['price'])
             l.add_value('room_count', flat['room_count'])
             l.add_value('floor', flat['floor'])
+            l.add_value('insertion_date', date.today().strftime("%Y-%m-%d"))
             flat_item = l.load_item()
             yield flat_item
 

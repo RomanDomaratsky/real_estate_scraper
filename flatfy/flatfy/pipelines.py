@@ -48,6 +48,9 @@ class DatePipeline:
         # Convert the date portion back to string format
         date_str = date_only.isoformat()
 
+        # insertion_date = date.today().strftime("%Y-%m-%d")
+        # item['insertion_date'] = insertion_date
+
         item['publication_date'] = date_str
 
         return item
@@ -73,12 +76,12 @@ class SavingToPostgresPipeline(object):
             self.cur.execute("""
                 INSERT INTO kyiv_apartments 
                 (flat_id, area_total, built_year, currency, district, micro_district, street, house_number, 
-                 publication_date, description, city, price, room_count, floor)
-                VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)""",
+                 publication_date, description, city, price, room_count, floor, insertion_date)
+                VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)""",
                              (item['flat_id'], item['area_total'], item['built_year'], item['currency'],
                               item['district'], item['micro_district'], item['street'], item['house_number'],
                               item['publication_date'], item['description'], item['city'], item['price'],
-                              item['room_count'], item['floor']))
+                              item['room_count'], item['floor'], item['insertion_date']))
 
             # Commit the transaction
             self.cur.execute("COMMIT")
