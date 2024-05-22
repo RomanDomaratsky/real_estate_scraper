@@ -8,6 +8,8 @@
 from itemadapter import ItemAdapter
 from datetime import datetime
 import psycopg2
+import os
+from dotenv import load_dotenv
 
 
 class FlatfyPipeline:
@@ -22,7 +24,7 @@ class CurrencyConversionPipeline:
 
         if currency == 'USD':
             # Set the constant exchange rate
-            nbu_exchange_rate = 36.5686  # Replace with your actual exchange rate
+            nbu_exchange_rate = 39.5686  # Replace with your actual exchange rate
 
             # Perform the conversion
             price_in_hryvnia = int(price * nbu_exchange_rate)
@@ -59,12 +61,13 @@ class DatePipeline:
 class SavingToPostgresPipeline(object):
 
     def __init__(self):
+        load_dotenv()
         self.conn = psycopg2.connect(
-            host="localhost",
-            database="apartments",
-            user="postgres",
-            password="is-91060502",
-            port="5432")
+            host=f"{os.getenv('DB_HOST')}",
+            database=f"{os.getenv('DB_NAME')}",
+            user=f"{os.getenv('DB_USER')}",
+            password=f"{os.getenv('DB_PASSWORD')}",
+            port=f"{os.getenv('DB_PORT')}")
         self.cur = self.conn.cursor()
 
     def process_item(self, item, spider):
